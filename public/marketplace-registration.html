@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Registration</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+    <h1>Marketplace Business Registration</h1>
+    
+    <!-- ✅ Updated action to match your server route -->
+    <form action="/submit-marketplace" method="POST">
+        
+        <label>Business Name:</label>
+        <input type="text" name="businessName" required>
+        
+        <label>Owner Name:</label>
+        <input type="text" name="ownerName" required>
+
+        <label>Country:</label>
+        <input type="text" name="country" required>
+
+        <label>Category:</label>
+        <select name="category" id="categorySelect" required>
+            <option value="">Loading categories...</option>
+        </select>
+
+        <label>Owner Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Business Description:</label>
+        <textarea name="description" rows="4" required></textarea>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        // Fetch categories from backend
+        fetch('/categories')
+            .then(res => res.json())
+            .then(categories => {
+                const select = document.getElementById('categorySelect');
+                select.innerHTML = '';
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat;
+                    option.textContent = cat;
+                    select.appendChild(option);
+                });
+            })
+            .catch(err => {
+                console.error('Error loading categories:', err);
+                document.getElementById('categorySelect').innerHTML =
+                    '<option value="">Error loading categories</option>';
+            });
+    </script>
+</body>
+</html>

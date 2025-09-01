@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy | CJB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-blue-800">CJB</a>
+      <button id="menu-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <ul id="menu" class="hidden md:flex md:items-center md:space-x-6 text-sm md:text-base">
+        <li><a href="tour.html" class="hover:text-blue-600">Tour to the Holy Land</a></li>
+        <li><a href="school.html" class="hover:text-blue-600">School of Eschatology</a></li>
+        <li><a href="forum.html" class="hover:text-blue-600">CJB Business Forum</a></li>
+        <li><a href="donate.html" class="hover:text-blue-600">Donate</a></li>
+        <li><a href="membership.html" class="hover:text-blue-600">CJB Membership</a></li>
+        <li><a href="echurch.html" class="hover:text-blue-600">eChurch</a></li>
+        <li><a href="store.html" class="hover:text-blue-600">Store</a></li>
+        <li><a href="marketplace.html" class="hover:text-blue-600">Marketplace</a></li>
+      </ul>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+      <ul class="flex flex-col space-y-2 text-sm">
+        <li><a href="tour.html" class="block hover:text-blue-600">Tour to the Holy Land</a></li>
+        <li><a href="school.html" class="block hover:text-blue-600">School of Eschatology</a></li>
+        <li><a href="forum.html" class="block hover:text-blue-600">CJB Business Forum</a></li>
+        <li><a href="donate.html" class="block hover:text-blue-600">Donate</a></li>
+        <li><a href="membership.html" class="block hover:text-blue-600">CJB Membership</a></li>
+        <li><a href="echurch.html" class="block hover:text-blue-600">eChurch</a></li>
+        <li><a href="store.html" class="block hover:text-blue-600">Store</a></li>
+        <li><a href="marketplace.html" class="block hover:text-blue-600">Marketplace</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative bg-cover bg-center h-[45vh]" style="background-image: url('assets/hero-privacy.jpg');">
+    <div class="absolute inset-0 bg-gray-900/60 flex items-center justify-center">
+      <div class="text-center px-4">
+        <h1 class="text-white text-4xl font-bold mb-2">Privacy Policy</h1>
+        <p class="text-white text-lg">Your trust matters. Here’s how we handle your data.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Policy Content -->
+  <main class="max-w-5xl mx-auto py-16 px-4 space-y-8">
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">1. Introduction</h2>
+      <p class="text-gray-700">
+        Christian Jewish Believers (“we”, “us”, “our”) is committed to protecting your privacy. This policy explains how we collect, use, disclose, and safeguard your information.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">2. Information We Collect</h2>
+      <p class="text-gray-700">
+        We may collect personal information you provide directly such as name, email address, business details, and messages via forms.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">3. How We Use Information</h2>
+      <p class="text-gray-700">
+        To respond to inquiries, process registrations and donations, send updates, and improve our services.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">4. Sharing & Disclosure</h2>
+      <p class="text-gray-700">
+        We do not sell your information. We may share it with trusted partners to fulfill services (e.g., email sending providers).
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">5. Security</h2>
+      <p class="text-gray-700">
+        We implement reasonable measures to protect your data, but no system is completely secure.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">6. Your Rights</h2>
+      <p class="text-gray-700">
+        You can request access, correction, or deletion of your personal data by contacting us.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-blue-800 mb-2">7. Contact</h2>
+      <p class="text-gray-700">
+        For questions about this policy, email us at <a href="mailto:info@cjb.org" class="text-blue-600 underline">info@cjb.org</a>.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white py-8 text-center text-sm text-gray-600">
+    <div class="max-w-5xl mx-auto">© Christian Jewish Believers</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

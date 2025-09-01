@@ -1,0 +1,24 @@
+[
+  {
+    "name": "john paulson",
+    "email": "rexamani1221@gmail.com",
+    "subject": "Membership requets",
+    "message": "i would love to be a member",
+    "date": "2025-08-17T07:13:34.449Z"
+  },
+  {
+    "name": "David Samson",
+    "email": "rexamani1211@gmail.com",
+    "subject": "I need more information on becoming a member",
+    "message": "please respond as soon as possible",
+    "date": "2025-08-27T14:27:25.503Z"
+  },
+  {
+    "name": "John Paulson",
+    "email": "glitzincs@gmail.com",
+    "subject": "i just need more information on the Movement",
+    "message": "please contact me as soon as possible",
+    "phone": null,
+    "date": "2025-09-01T10:39:22.542Z"
+  }
+]

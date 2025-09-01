@@ -1,0 +1,26 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "David",
+    "title": "Mr",
+    "phone": "08109561020",
+    "address": "No 4 yerima street Sabo Tasha",
+    "country": "Nigeria",
+    "email": "glitzincs@gmail.com",
+    "destination": "Israel",
+    "dates": "September",
+    "submittedAt": "2025-08-28T18:16:31.866Z"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Samson",
+    "title": "Mr",
+    "phone": "08034630666",
+    "address": "No 4 yerima street Sabo Tasha",
+    "country": "Nigeria",
+    "email": "rexamani1221@gmail.com",
+    "destination": "Greece",
+    "dates": "April",
+    "submittedAt": "2025-08-28T18:37:40.107Z"
+  }
+]
