@@ -4,6 +4,7 @@
   "description": "church",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "john paulson",
@@ -14,6 +15,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "livekit-client": "^2.15.4",
+    "mongoose": "^8.18.0",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.5"
   }
