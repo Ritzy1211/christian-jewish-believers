@@ -1,12 +1,5 @@
+const mongoose = require("mongoose");
 require('dotenv').config();
-console.log("Environment variables loaded:");
-console.log("PORT:", process.env.PORT);
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
-console.log("CONTACT_EMAIL:", process.env.CONTACT_EMAIL);
-console.log("SCHOOL_EMAIL:", process.env.SCHOOL_EMAIL);
-console.log("TOUR_EMAIL:", process.env.TOUR_EMAIL);
-console.log("BUSINESS_EMAIL:", process.env.BUSINESS_EMAIL);
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -62,6 +55,14 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS  // Gmail App Password
   }
 });
+
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ Connected to MongoDB Atlas"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
 
 // ===================================================================
 //                         ROUTES
