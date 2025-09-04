@@ -64,6 +64,44 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
+const ContactSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  message: String,
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Contact = mongoose.model("Contact", ContactSchema);
+
+app.post("/contact", async (req, res) => {
+  try {
+    const contact = new Contact(req.body);
+    await contact.save();
+    res.send("✅ Saved to MongoDB");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("❌ Error saving to MongoDB");
+  }
+});
+
+app.get("/debug-insert", async (req, res) => {
+  try {
+    const TestModel = mongoose.model(
+      "Test",
+      new mongoose.Schema({ name: String }),
+      "testCollection"
+    );
+
+    const doc = await TestModel.create({ name: "Hello MongoDB!" });
+
+    res.json({ success: true, doc });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to insert test document" });
+  }
+});
+
+
 // ===================================================================
 //                         ROUTES
 // ===================================================================
