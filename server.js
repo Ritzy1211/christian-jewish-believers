@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 // Import models
-const contact = require("./models/contact");
+const Contact = require("./models/contact");
 const Forum = require("./models/Forum");
 const Membership = require("./models/Membership");
 const School = require("./models/School");
 const Tour = require("./models/Tour");
 const Marketplace = require("./models/Marketplace");
-const Product = require("./models/Product");
+const product = require("./models/product");
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -72,27 +72,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
-const ContactSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  message: String,
-  createdAt: { type: Date, default: Date.now }
-});
-
-const Contact = mongoose.model("Contact", ContactSchema);
-
-app.post("/contact", async (req, res) => {
-  try {
-    const contact = new Contact(req.body);
-    await contact.save();
-    res.send("✅ Saved to MongoDB");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("❌ Error saving to MongoDB");
-  }
-});
-
-
 // ===================================================================
 //                         ROUTES
 // ===================================================================
@@ -149,7 +128,8 @@ app.post("/submit-marketplace", async (req, res) => {
 
 
 // PRODUCT (keeps multer for image)
-app.post("/submit-product", upload.single("image"), async (req, res) => {
+
+  app.post("/submit-product", upload.single("image"), async (req, res) => {
   try {
     const { name, category, price, description } = req.body;
     const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
@@ -180,7 +160,7 @@ app.post("/submit-product", upload.single("image"), async (req, res) => {
     console.error("Error saving product:", err);
     res.status(500).send("Error submitting product");
   }
-});
+}); 
 
 // ---------- Membership Registration ----------
 app.post("/submit-membership", async (req, res) => {
@@ -416,7 +396,7 @@ app.post("/submit-forum", async (req, res) => {
 });
 
 // ---------- Product Submission ----------
-app.post("/submit-product", upload.single("image"), (req, res) => {
+  app.post("/submit-product", upload.single("image"), (req, res) => {
   const filePath = path.join(__dirname, "data", "products.json");
   fs.readFile(filePath, "utf-8", (err, data) => {
     let products = [];
@@ -444,6 +424,7 @@ app.post("/submit-product", upload.single("image"), (req, res) => {
 
 
 // Get all approved products (no category filter)
+
 app.get("/api/products", (req, res) => {
   fs.readFile(productsFile, "utf8", (err, data) => {
     if (err) {
@@ -494,56 +475,54 @@ app.get("/api/products/:category", (req, res) => {
 });
 
 // ---------- Contact Form Submission (saves + sends email) ----------
-app.post('/submit-contact', async (req, res) => {
-  const { name, email, subject, message, phone } = req.body;
-
-  if (!name || !email || !subject || !message) {
-    return res.status(400).send('All fields are required.');
-  }
-
-  const contactFilePath = path.join(__dirname, 'contacts.json');
-
-  let contacts = [];
-  if (fs.existsSync(contactFilePath)) {
-    try {
-      contacts = JSON.parse(fs.readFileSync(contactFilePath));
-    } catch {
-      contacts = [];
-    }
-  }
-
-  contacts.push({
-    name,
-    email,
-    subject,
-    message,
-    phone: phone || null,
-    date: new Date().toISOString()
-  });
-
-  fs.writeFileSync(contactFilePath, JSON.stringify(contacts, null, 2));
-
+app.post("/submit-contact", async (req, res) => {
   try {
-    await transporter.sendMail({
-      from: `"CJB Website" <${process.env.EMAIL_USER}>`,
-      to: process.env.CONTACT_EMAIL || process.env.ADMIN_EMAIL,
-      subject: '📥 New Contact Information Received',
-      html: `
-        <h2>New Contact Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
-        <p><strong>Message:</strong> ${message}</p>
-        <p><em>Submitted at ${new Date().toLocaleString()}</em></p>
-      `
-    });
-  } catch (err) {
-    console.error('Email error (contact):', err);
-    // continue; user still gets success if saving worked
-  }
+    const { name, email, subject, message, phone } = req.body;
+    if (!name || !email || !subject || !message) {
+      return res.status(400).send("All fields are required.");
+    }
 
-  res.status(200).send('Message received successfully.');
+    // Save to MongoDB
+    const doc = await Contact.create({ name, email, subject, message, phone });
+
+    // Confirmation to applicant
+    try {
+      await transporter.sendMail({
+        from: `"CJB Website" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: "We received your message",
+        html: `
+          <h2>Hi ${name},</h2>
+          <p>Thanks for contacting CJB. We received your message about <strong>${subject}</strong> and will get back to you soon.</p>
+        `
+      });
+
+      // Notification to admin
+      await transporter.sendMail({
+        from: `"CJB Website" <${process.env.EMAIL_USER}>`,
+        to: process.env.CONTACT_EMAIL || process.env.ADMIN_EMAIL,
+        subject: "📥 New Contact Submission",
+        html: `
+          <h2>New Contact Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || "N/A"}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong> ${message}</p>
+          <p><em>Submitted at ${new Date().toLocaleString()}</em></p>
+        `
+      });
+    } catch (mailErr) {
+      console.error("Email error (contact):", mailErr);
+      // still continue — the form was saved
+    }
+
+    // keep previous behavior: HTTP 200 text
+    res.status(200).send("Message received successfully.");
+  } catch (err) {
+    console.error("Error saving contact:", err);
+    res.status(500).send("Error submitting form");
+  }
 });
 
 // ---------- Categories API ----------
