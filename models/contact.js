@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const ContactSchema = new mongoose.Schema({
   name: String,
@@ -8,4 +8,4 @@ const ContactSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-const Contact = mongoose.models.Contact || mongoose.models("Contact", ContactSchema);
+module.exports = mongoose.models.Contact || mongoose.model("Contact", ContactSchema);

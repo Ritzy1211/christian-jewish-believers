@@ -1,11 +1,11 @@
+const mongoose = require("mongoose");
+
 const ForumSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  company: String,
-  phone: String,
-  address: String,
-  country: String,
+  name: String,
   email: String,
+  topic: String,
+  message: String,
   createdAt: { type: Date, default: Date.now }
 });
-const Forum = mongoose.models.Forum || mongoose.models("Forum", ForumSchema);
+
+module.exports = mongoose.models.Forum || mongoose.model("Forum", ForumSchema);
