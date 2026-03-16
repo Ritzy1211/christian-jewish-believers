@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" 
+  rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html"><img src="../assets/img/LOGO-BG.jpeg" alt="" style="width: auto; height: 35px; border-radius: 50%;" ></a>
+      <button id="menu-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <ul id="menu" class="hidden md:flex md:items-center md:space-x-6 text-sm md:text-base">
+        <li><a href="tour.html" class="hover:text-blue-600">Tour to the Holy Land</a></li>
+        <li><a href="school of escatology.html" class="hover:text-blue-600">School of Eschatology</a></li>
+        <li><a href="forum.html" class="hover:text-blue-600">CJB Business Forum</a></li>
+        <li><a href="membership.html" class="hover:text-blue-600">CJB Membership</a></li>
+        <li><a href="store.html" class="hover:text-blue-600">Store</a></li>
+        <li><a href="marketplace.html" class="hover:text-blue-600">Marketplace</a></li>
+      </ul>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+      <ul class="flex flex-col space-y-2 text-sm">
+        <li><a href="tour.html" class="block hover:text-blue-600">Tour to the Holy Land</a></li>
+        <li><a href="school of escatology.html" class="block hover:text-blue-600">School of Eschatology</a></li>
+        <li><a href="forum.html" class="block hover:text-blue-600">CJB Business Forum</a></li>
+        <li><a href="membership.html" class="block hover:text-blue-600">CJB Membership</a></li>
+        <li><a href="store.html" class="block hover:text-blue-600">Store</a></li>
+        <li><a href="marketplace.html" class="block hover:text-blue-600">Marketplace</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative bg-cover bg-center h-[50vh]" style="background-image: url(./assets/img/hero-donate.jpg);">
+    <div class="absolute inset-0 bg-green-900/60 flex items-center justify-center">
+      <div class="text-center px-4">
+        <h1 class="text-white text-4xl font-bold mb-2">Support the Mission</h1>
+        <p class="text-white text-lg">Jesus/Yeshua humbled Himself and died on the cross in order to place our interest above His own 
+          to meet our greatest need. Likewise, we are to emulate Jesus to place the interest of others above ours to make sure their needs 
+          are met in accordance to God’s commandments in Genesis 12:3; Matthew 25:33-46, so we use this opportunity to solicit for your DONATION:.</p>
+      </div>
+    </div>
+  </section>
+
+
+<main class="max-w-5xl mx-auto py-16 px-4">
+    <div class="bg-white rounded-lg shadow p-8">
+      <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Give Online</h2>
+      <p>To support the less priviledge of our christian communities of CJB member nations and israel affected communities(Children, widows etc)
+        we will be rewarded for keeping to God's commandments.
+      </p> <br>
+<h2>DONATE DIRECTLY THROUGH THIS ACCOUNT</h2> <br>
+<h1>MESSIANIC VOICE INTERNATIONAL MINISTRY:
+ <h1> BANK: ACCESS BANK:</h1>
+  <h1>0070640114</h1>
+</h1> <br>
+<h2>DOllAR ACCOUNT</h2> <br>
+<h1>MESSIANIC VOICE INTERNATIONAL MINISTRY:
+ <h1> BANK: ACCESS BANK:</h1>
+  <h1>0091412349</h1>
+</h1>
+
+    </div>
+  </main>
+
+  <!-- Donation Options -->
+   <main>
+        <form id="donationForm">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+            <label for="amount">Donation Amount</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency" required>
+                <option value="NGN">Nigerian Naira (₦)</option>
+                <option value="USD">US Dollar ($)</option>
+                <option value="GBP">British Pound (£)</option>
+                <option value="EUR">Euro (€)</option>
+            </select>
+
+            <button type="submit">Donate Now</button>
+        </form>
+    </main>
+
+    <!-- Flutterwave Inline JS -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+
+    <script>
+        document.getElementById('donationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const amount = document.getElementById('amount').value;
+            const currency = document.getElementById('currency').value;
+
+            FlutterwaveCheckout({
+                public_key: "FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxx-X", // Replace with your Flutterwave PUBLIC KEY
+                tx_ref: "donation-" + Date.now(),
+                amount: amount,
+                currency: currency,
+                payment_options: "card, banktransfer, ussd, mobilemoneyghana, mpesa",
+                customer: {
+                    email: email,
+                    name: name,
+                },
+                callback: function (data) {
+                    console.log(data);
+                    alert("Thank you! Your donation was successful.");
+                },
+                onclose: function () {
+                    console.log("Payment closed");
+                },
+                customizations: {
+                    title: "Christian Jewish Believers",
+                    description: "Donation Payment",
+                    logo: "assets/logo.png",
+                },
+            });
+        });
+    </script>
+
+<!--footer section-->
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> 
+    <p class="col-md-4 mb-0 text-body-secondary">© 2025 CJB</p> 
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap"> 
+        <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+            <use xlink:href="#bootstrap">
+            </use>
+        </svg>
+    </a><ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item">
+        <a href="index.html" class="nav-link px-2 text-body-secondary">Home</a>
+    </li>
+    <li class="nav-item">
+        <a href="contact.html" class="nav-link px-2 text-body-secondary">Contact</a>
+    </li> 
+    <li class="nav-item">
+        <a href="about.html" class="nav-link px-2 text-body-secondary">About</a>
+    </li> 
+    </li> <li class="nav-item">
+        <a href="privacy.html" class="nav-link px-2 text-body-secondary">Privacy policy</a>
+    </li> 
+</ul> 
+</footer>
+
+  <!-- Script -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>

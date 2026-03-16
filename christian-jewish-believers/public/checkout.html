@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - CJB Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+ <!-- <script src="https://js.paystack.co/v1/inline.js"></script> Paystack Script -->
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Header -->
+  <nav class="bg-white shadow-md p-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold text-blue-800">CJB Store - Checkout</h1>
+      <a href="store.html" class="text-blue-600 hover:underline">← Continue Shopping</a>
+    </div>
+  </nav>
+
+  <!-- Checkout Container -->
+  <main class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h2 class="text-2xl font-bold mb-6">Your Cart</h2>
+    <div id="cart-items" class="space-y-4"></div>
+
+    <div class="mt-6 flex justify-between items-center border-t pt-4">
+      <h3 class="text-xl font-semibold">Grand Total:</h3>
+      <span id="grand-total" class="text-xl font-bold text-blue-800">$0</span>
+    </div>
+
+    <!-- Email for payment -->
+    <input type="email" id="customer-email" placeholder="Enter your email for receipt" 
+      class="mt-4 p-3 border w-full rounded" required>
+
+    <button id="proceed-payment" class="mt-6 bg-blue-800 text-white px-6 py-3 rounded hover:bg-blue-600 w-full">
+      Proceed to Payment
+    </button>
+  </main>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cart-items');
+    const grandTotalEl = document.getElementById('grand-total');
+
+    let grandTotal = 0;
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = `<p class="text-gray-600">Your cart is empty.</p>`;
+    } else {
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        grandTotal += itemTotal;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add("flex", "items-center", "border", "p-4", "rounded", "shadow-sm");
+
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded mr-4">
+          <div class="flex-1">
+            <h4 class="font-semibold">${item.name}</h4>
+            <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+          </div>
+          <span class="font-bold">$${itemTotal.toFixed(2)}</span>
+        `;
+
+        cartContainer.appendChild(itemDiv);
+      });
+
+      grandTotalEl.innerText = `$${grandTotal.toFixed(2)}`;
+    }
+
+    document.getElementById('proceed-payment').addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      const email = document.getElementById('customer-email').value;
+      if (!email) {
+        alert("Please enter your email for payment receipt.");
+        return;
+      }
+
+      // Convert to kobo (Paystack uses smallest currency unit)
+      const amountInKobo = grandTotal * 100;
+
+      let handler = PaystackPop.setup({
+        key: 'pk_test_29da6361a45b31437874b04e2ad88685b5bc4842', // Replace with your Paystack public key
+        email: email,
+        amount: amountInKobo,
+        currency: "NGN", // or "NGN" for Naira
+        currency: "USD",
+        callback: function(response) {
+          alert("Payment Successful! Transaction ref: " + response.reference);
+          localStorage.removeItem('cart'); // Clear cart
+          window.location.href = "store.html"; // Redirect after payment
+        },
+        onClose: function() {
+          alert('Transaction was not completed.');
+        }
+      });
+
+      handler.openIframe();
+    });
+  </script>
+
+</body>
+</html>

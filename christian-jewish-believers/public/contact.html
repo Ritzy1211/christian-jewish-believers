@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | CJB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" 
+  rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-blue-800">CJB</a>
+      <button id="menu-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <ul id="menu" class="hidden md:flex md:items-center md:space-x-6 text-sm md:text-base">
+        <li><a href="tour.html" class="hover:text-blue-600">Tour to the Holy Land</a></li>
+        <li><a href="school of escatology.html" class="hover:text-blue-600">School of Eschatology</a></li>
+        <li><a href="forum.html" class="hover:text-blue-600">CJB Business Forum</a></li>
+        <li><a href="donate.html" class="hover:text-blue-600">Donate</a></li>
+        <li><a href="membership.html" class="hover:text-blue-600">CJB Membership</a></li>
+        <li><a href="store.html" class="hover:text-blue-600">Store</a></li>
+        <li><a href="marketplace.html" class="hover:text-blue-600">Marketplace</a></li>
+      </ul>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+      <ul class="flex flex-col space-y-2 text-sm">
+        <li><a href="tour.html" class="block hover:text-blue-600">Tour to the Holy Land</a></li>
+        <li><a href="school of escatology.html" class="block hover:text-blue-600">School of Eschatology</a></li>
+        <li><a href="forum.html" class="block hover:text-blue-600">CJB Business Forum</a></li>
+        <li><a href="donate.html" class="block hover:text-blue-600">Donate</a></li>
+        <li><a href="membership.html" class="block hover:text-blue-600">CJB Membership</a></li>
+        <li><a href="store.html" class="block hover:text-blue-600">Store</a></li>
+        <li><a href="marketplace.html" class="block hover:text-blue-600">Marketplace</a></li>
+         <li><a href="contact.html" class="block hover:text-blue-600">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative bg-cover bg-center h-[45vh]" style="background-image: url('./assets/img/hero-contact.jpg');">
+    <div class="absolute inset-0 bg-blue-800/60 flex items-center justify-center">
+      <div class="text-center px-4">
+        <h1 class="text-white text-4xl font-bold mb-2">Get in Touch</h1>
+        <p class="text-white text-lg">Welcome to our community! We are a Jewish community for believers in Yeshua, and we are thrilled to connect with you. 
+          Feel free to reach out to us with any questions, comments, or prayer requests. We look forward to hearing from you!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info -->
+  <main class="max-w-6xl mx-auto py-16 px-4 grid gap-12 md:grid-cols-2">
+    <!-- Form -->
+    <div class="bg-white rounded-lg shadow p-8">
+      <h2 class="text-2xl font-bold mb-4 text-blue-800">Contact Form</h2>
+      <form id="contact-form" action="/submit-contact" method="POST" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Name</label>
+          <input name="name" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" name="email" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Subject</label>
+          <input name="subject" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Message</label>
+          <textarea name="message" rows="5" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-blue-800 text-white px-6 py-3 rounded hover:bg-blue-900 transition">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Info -->
+    <div class="space-y-6">
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-2">Head Office</h3>
+        <p class="text-gray-700 text-sm">No.12 samaila Bahago street, Romi new Extention</p>
+        <p class="text-gray-700 text-sm">Email: christianjewishbelievers@gmail.com</p>
+        <p class="text-gray-700 text-sm">Phone: +234 802 3072 695</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-2">Connect with Us</h3>
+        <p class="text-gray-700 text-sm">Follow on social media for updates and live events.</p>
+        <div class="flex gap-4 mt-2">
+          <a href="#" class="text-blue-600 underline">Facebook</a>
+          <a href="#" class="text-blue-600 underline">Instagram</a>
+          <a href="#" class="text-blue-600 underline">X</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+<!--footer section-->
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> 
+    <p class="col-md-4 mb-0 text-body-secondary">© 2025 CJB</p> 
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap"> 
+        <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+            <use xlink:href="#bootstrap">
+            </use>
+        </svg>
+    </a><ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item">
+        <a href="index.html" class="nav-link px-2 text-body-secondary">Home</a>
+    </li>
+    <li class="nav-item">
+        <a href="contact.html" class="nav-link px-2 text-body-secondary">Contact</a>
+    </li> 
+    <li class="nav-item">
+        <a href="about.html" class="nav-link px-2 text-body-secondary">About</a>
+    </li> 
+    </li> <li class="nav-item">
+        <a href="privacy.html" class="nav-link px-2 text-body-secondary">Privacy policy</a>
+    </li> 
+</ul> 
+</footer>
+
+  <!-- Scripts -->
+  <script>
+  document.getElementById('menu-toggle').addEventListener('click', function () {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = {
+      name: this.name.value.trim(),
+      email: this.email.value.trim(),
+      subject: this.subject.value.trim(),
+      message: this.message.value.trim()
+    };
+
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      alert('Please fill all required fields.');
+      return;
+    }
+
+    try {
+      const res = await fetch('/submit-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        alert('Message sent successfully! We will get back to you soon.');
+        this.reset();
+      } else {
+        const errorText = await res.text();
+        alert('Failed to send message: ' + errorText);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred while sending your message.');
+    }
+  });
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>

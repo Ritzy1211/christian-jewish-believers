@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Product</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Marketplace</h1>
+      <nav class="space-x-4">
+        <a href="marketplace.html" class="hover:underline">Home</a>
+        <a href="marketplace-registration.html" class="hover:underline">Register Business</a>
+        <a href="add-product.html" class="hover:underline">Add Product</a>
+        <a href="products.html" class="hover:underline">View Products</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Form -->
+  <main class="max-w-3xl mx-auto p-8">
+    <h2 class="text-3xl font-bold mb-6 text-center">Add a Product</h2>
+    <form action="/submit-product" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow space-y-4">
+      <input type="text" name="name" placeholder="Your Name" class="w-full p-2 border rounded" required>
+      <input type="email" name="email" placeholder="Your Email" class="w-full p-2 border rounded" required>
+      <input type="text" name="productName" placeholder="Product Name" class="w-full p-2 border rounded" required>
+      <select name="category" class="w-full p-2 border rounded" required>
+        <option value="">Select Category</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Food">Food</option>
+        <option value="Technology">Technology</option>
+        <option value="Books">Books</option>
+        <option value="Services">Services</option>
+        <option value="Others">Others</option>
+      </select>
+      <textarea name="description" placeholder="Product Description" class="w-full p-2 border rounded" required></textarea>
+      <input type="file" name="image" accept="image/*" class="w-full p-2 border rounded">
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Submit Product</button>
+    </form>
+  </main>
+
+</body>
+</html>

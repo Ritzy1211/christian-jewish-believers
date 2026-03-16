@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+    }
+    .filter {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .filter select {
+      padding: 8px;
+      font-size: 16px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+    }
+    .product img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+    .product p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Marketplace Products</h1>
+  </header>
+  <main>
+    <div class="filter">
+      <label for="category">Filter by Category: </label>
+      <select id="category">
+        <option value="all">Show All</option>
+        <option value="Technology">Technology</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Food">Food</option>
+        <option value="Services">Services</option>
+      </select>
+    </div>
+    <div class="products" id="products"></div>
+  </main>
+
+  <script>
+    const categorySelect = document.getElementById("category");
+    const productsContainer = document.getElementById("products");
+
+    async function fetchProducts(category = "all") {
+      try {
+        let url = "/api/products";
+        if (category !== "all") {
+          url = `/api/products/${category}`;
+        }
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Server responded with " + res.status);
+
+        const products = await res.json();
+        displayProducts(products);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        productsContainer.innerHTML = <p style="color:red;">Failed to load products.</p>;
+      }
+    }
+
+    function displayProducts(products) {
+      productsContainer.innerHTML = "";
+
+      if (products.length === 0) {
+        productsContainer.innerHTML = "<p>No products found.</p>";
+        return;
+      }
+
+      products.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <img src="/uploads/${p.image ? p.image : "placeholder.jpg"}" 
+               alt="${p.name}" 
+               onerror="this.src='/uploads/placeholder.jpg'">
+          <h3>${p.productName}</h3>
+          <p><strong>Category:</strong> ${p.category}</p>
+          <p>${p.description || ""}</p>
+          <p><strong>Seller:</strong> ${p.name}</p>
+        `;
+        productsContainer.appendChild(div);
+      });
+    }
+
+    // Initial load
+    fetchProducts();
+
+    // Filter change
+    categorySelect.addEventListener("change", (e) => {
+      fetchProducts(e.target.value);
+    });
+  </script>
+</body>
+</html>
