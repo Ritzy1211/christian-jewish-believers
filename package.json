@@ -2,8 +2,9 @@
   "name": "christian-jewish-believers",
   "version": "1.0.0",
   "description": "church",
-  "main": "index.js",
+  "main": "christian-jewish-believers/server.js",
   "scripts": {
+    "start": "node christian-jewish-believers/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "john paulson",
